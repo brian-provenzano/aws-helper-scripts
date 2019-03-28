@@ -110,17 +110,17 @@ def validate(client,template=None,directory=None):
 def print_message(message_type,friendly_message,detail_message=None,show_message_type=True):
     """ prints messages in format we want """
     if message_type == message_type.DEBUG:
-        color = fg.YELLOW
-        coloroff = style.RESET_ALL
+        color = Foreground.YELLOW
+        coloroff = Style.RESET_ALL
     elif message_type == message_type.INFO:
-        color = fg.GREEN
-        coloroff = style.RESET_ALL
+        color = Foreground.GREEN
+        coloroff = Style.RESET_ALL
     elif message_type == message_type.WARNING:
-        color = fg.YELLOW
-        coloroff = style.RESET_ALL
+        color = Foreground.YELLOW
+        coloroff = Style.RESET_ALL
     elif message_type == message_type.ERROR:
-        color = fg.RED
-        coloroff = style.RESET_ALL
+        color = Foreground.RED
+        coloroff = Style.RESET_ALL
     else:
         color = ""
         coloroff = ""
@@ -146,7 +146,7 @@ class MessageType(Enum):
 
 
 # Terminal color definitions - cheap and easy colors for this application
-class fg:
+class Foreground:
     BLACK   = '\033[30m'
     RED     = '\033[31m'
     GREEN   = '\033[32m'
@@ -157,7 +157,7 @@ class fg:
     WHITE   = '\033[37m'
     RESET   = '\033[39m'
 
-class bg:
+class Background:
     BLACK   = '\033[40m'
     RED     = '\033[41m'
     GREEN   = '\033[42m'
@@ -168,7 +168,7 @@ class bg:
     WHITE   = '\033[47m'
     RESET   = '\033[49m'
 
-class style:
+class Style:
     BRIGHT    = '\033[1m'
     DIM       = '\033[2m'
     NORMAL    = '\033[22m'

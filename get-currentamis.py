@@ -64,7 +64,7 @@ def main():
         get_image(description_list, client)
 
     except Exception as e:
-        print_message(MessageType.ERROR,"Error occurred [{0}] ".format(type(e).__name__),e)
+        print_message(message_type.ERROR,"Error occurred [{0}] ".format(type(e).__name__),e)
 
 
 def authenticate(aws_resource, region=None):
@@ -76,7 +76,7 @@ def authenticate(aws_resource, region=None):
             session = boto3.Session(profile_name="default")
             region = session.region_name
         client = session.client(aws_resource)
-        print_message(MessageType.INFO,"Using AWS profile [ default ] which is currently set to the region [ {0} ]".format(region))
+        print_message(message_type.INFO,"Using AWS profile [ default ] which is currently set to the region [ {0} ]".format(region))
         return client
     except ClientError:
         raise 
@@ -140,30 +140,30 @@ def get_image(description_list, client):
         raise 
 
 
-def print_message(messageType,friendlyMessage,detailMessage="None"):
+def print_message(message_type,friendly_message,detail_message="None"):
     """ prints messages in format we want """
-    if messageType == messageType.DEBUG:
-        color = fg.YELLOW
-        coloroff = style.RESET_ALL
-    elif messageType == messageType.INFO:
-        color = fg.GREEN
-        coloroff = style.RESET_ALL
-    elif messageType == messageType.WARNING:
-        color = fg.YELLOW
-        coloroff = style.RESET_ALL
-    elif messageType == messageType.ERROR:
-        color = fg.RED
-        coloroff = style.RESET_ALL
+    if message_type == message_type.DEBUG:
+        color = Foreground.YELLOW
+        coloroff = Style.RESET_ALL
+    elif message_type == message_type.INFO:
+        color = Foreground.GREEN
+        coloroff = Style.RESET_ALL
+    elif message_type == message_type.WARNING:
+        color = Foreground.YELLOW
+        coloroff = Style.RESET_ALL
+    elif message_type == message_type.ERROR:
+        color = Foreground.RED
+        coloroff = Style.RESET_ALL
     else:
         color = ""
         coloroff = ""
-    if detailMessage == "None":
-        print("{3}[{0}] - {1}{4}".format(str(messageType.name),friendlyMessage,detailMessage,color,coloroff))
+    if detail_message == "None":
+        print("{3}[{0}] - {1}{4}".format(str(message_type.name),friendly_message,detail_message,color,coloroff))
     else:
-        print("{3}[{0}] - {1} - More Details [{2}]{4}".format(str(messageType.name),friendlyMessage,detailMessage,color,coloroff))
+        print("{3}[{0}] - {1} - More Details [{2}]{4}".format(str(message_type.name),friendly_message,detail_message,color,coloroff))
 
 
-class MessageType(Enum):
+class message_type(Enum):
     """ Message type enumeration"""
     INVALID = 0
     DEBUG = 1
@@ -173,7 +173,7 @@ class MessageType(Enum):
 
 
 # Terminal color definitions - cheap and easy colors for this application
-class fg:
+class Foreground:
     BLACK   = '\033[30m'
     RED     = '\033[31m'
     GREEN   = '\033[32m'
@@ -184,7 +184,7 @@ class fg:
     WHITE   = '\033[37m'
     RESET   = '\033[39m'
 
-class bg:
+class Background:
     BLACK   = '\033[40m'
     RED     = '\033[41m'
     GREEN   = '\033[42m'
@@ -195,7 +195,7 @@ class bg:
     WHITE   = '\033[47m'
     RESET   = '\033[49m'
 
-class style:
+class Style:
     BRIGHT    = '\033[1m'
     DIM       = '\033[2m'
     NORMAL    = '\033[22m'
